@@ -34,22 +34,26 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
-# Set permissions for Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Install NPM dependencies and build assets
 RUN npm install && npm run build
 
+# Set permissions for Laravel
+RUN chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html
+
 # Configure Apache to point to /public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/000-default.conf
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
+# Prepare entrypoint
+RUN chmod +x entrypoint.sh
+
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Use custom entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
