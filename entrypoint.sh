@@ -6,8 +6,9 @@ touch database/database.sqlite
 chmod -R 775 database
 chown -R www-data:www-data database
 
-# Run migrations
+# Run migrations and seeders
 php artisan migrate --force
+php artisan db:seed --force
 
 # Clear and cache config/routes/views
 php artisan config:cache

@@ -19,40 +19,50 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Create Users
-        $admin = User::factory()->create([
-            'name' => 'System Administrator',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'System Administrator',
+                'password' => Hash::make('123456'),
+                'role' => 'admin',
+            ]
+        );
 
-        $teacher = User::factory()->create([
-            'name' => 'Professor Xavier',
-            'email' => 'teacher@demo.com',
-            'password' => Hash::make('password'),
-            'role' => 'teacher',
-        ]);
+        $teacher = User::updateOrCreate(
+            ['email' => 'teacher@demo.com'],
+            [
+                'name' => 'Professor Xavier',
+                'password' => Hash::make('123456'),
+                'role' => 'teacher',
+            ]
+        );
 
-        $parent = User::factory()->create([
-            'name' => 'Robert Jones',
-            'email' => 'parent@demo.com',
-            'password' => Hash::make('password'),
-            'role' => 'parent',
-        ]);
+        $parent = User::updateOrCreate(
+            ['email' => 'parent@demo.com'],
+            [
+                'name' => 'Robert Jones',
+                'password' => Hash::make('123456'),
+                'role' => 'parent',
+            ]
+        );
 
-        $student1 = User::factory()->create([
-            'name' => 'Student Alice',
-            'email' => 'student@demo.com',
-            'password' => Hash::make('password'),
-            'role' => 'student',
-        ]);
+        $student1 = User::updateOrCreate(
+            ['email' => 'student@demo.com'],
+            [
+                'name' => 'Student Alice',
+                'password' => Hash::make('123456'),
+                'role' => 'student',
+            ]
+        );
 
-        $student2 = User::factory()->create([
-            'name' => 'Student Bob',
-            'email' => 'bob@demo.com',
-            'password' => Hash::make('password'),
-            'role' => 'student',
-        ]);
+        $student2 = User::updateOrCreate(
+            ['email' => 'bob@demo.com'],
+            [
+                'name' => 'Student Bob',
+                'password' => Hash::make('123456'),
+                'role' => 'student',
+            ]
+        );
 
         // 2. Create Profiles
         $parentProfile = \App\Models\ParentProfile::create([
