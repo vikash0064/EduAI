@@ -1,0 +1,24 @@
+# First-Time Git Setup for Academic Progress Tracker
+
+Follow these commands to initialize Git in your project and connect it to a GitHub repository.
+
+1. Initialize Git repository (Laravel new usually does this, but just in case):
+   git init
+
+2. Add your GitHub repository as the origin remote.
+   (Replace YOUR_USERNAME and YOUR_REPO with your actual GitHub info)
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+
+3. Ensure you're on the main branch:
+   git branch -M main
+
+4. Stage all files for the first commit:
+   git add .
+
+5. Make the initial commit:
+   git commit -m "Initial commit: Academic Progress Tracker base setup"
+
+6. Push your code to GitHub and set upstream tracking:
+   git push -u origin main
+
+After running these commands once, you can just use `./push.sh` or `./watch-push.sh` to automatically push changes!
